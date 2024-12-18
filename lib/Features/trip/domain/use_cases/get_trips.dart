@@ -7,7 +7,7 @@ class GetTrips {
 
   GetTrips(this.tripRepos);
 
-  Future<Trip> call() async {
+  Future<List<Trip>> call() async {
     return await tripRepos.getTrip();
   }
 }
