@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:traver_riverpod_app/Features/trip/domain/entities/trip.dart';
 
 part 'trip_model.g.dart';
 
@@ -21,4 +22,21 @@ class TripModel {
       required this.location,
       required this.images,
       required this.dateTime});
+
+  // conversion from entity to model
+  factory TripModel.fromEntity(Trip trip) => TripModel(
+        title: trip.title,
+        description: trip.description,
+        location: trip.location,
+        images: trip.images,
+        dateTime: trip.dateTime,
+      );
+// conversion from model to entity
+  Trip toEntity() => Trip(
+        title: title,
+        description: description,
+        location: location,
+        images: images,
+        dateTime: dateTime,
+      );
 }
