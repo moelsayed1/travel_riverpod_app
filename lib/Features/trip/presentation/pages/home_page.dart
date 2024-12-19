@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:traver_riverpod_app/Features/trip/presentation/pages/add_trip_page.dart';
+import 'package:traver_riverpod_app/Features/trip/presentation/pages/my_trip_page.dart';
+import 'package:traver_riverpod_app/Features/trip/presentation/providers/trip_provider.dart';
 
 class HomePage extends ConsumerWidget {
   final PageController _pageController = PageController();
@@ -9,6 +12,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(tripListNotifierProvider.notifier).loadTrips();
     _pageController.addListener(() {
       _currentIndex.value = _pageController.page!.round();
     });
@@ -40,10 +44,10 @@ class HomePage extends ConsumerWidget {
         ),
         body: PageView(
           controller: _pageController,
-          children: const [
-            Text('1'),
-            Text('2'),
-            Text('3'),
+          children: [
+            const MyTripPage(),
+            AddTripPage(),
+            const Text('3'),
           ],
         ),
         bottomNavigationBar: ValueListenableBuilder(
